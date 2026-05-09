@@ -22,13 +22,12 @@ jobs:
           key: hancinema-state-${{ github.run_id }}
           restore-keys: hancinema-state-
       - name: Rodar monitoramento
-        env:
+             env:
           AIRTABLE_KEY: ${{ secrets.AIRTABLE_KEY }}
           AIRTABLE_BASE: ${{ secrets.AIRTABLE_BASE }}
           AIRTABLE_TABLE: ${{ secrets.AIRTABLE_TABLE }}
-          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: python monitor.py
       - uses: actions/cache/save@v4
         if: always()
