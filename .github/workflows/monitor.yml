@@ -22,7 +22,7 @@ jobs:
           key: hancinema-state-${{ github.run_id }}
           restore-keys: hancinema-state-
       - name: Rodar monitoramento
-             env:
+        env:
           AIRTABLE_KEY: ${{ secrets.AIRTABLE_KEY }}
           AIRTABLE_BASE: ${{ secrets.AIRTABLE_BASE }}
           AIRTABLE_TABLE: ${{ secrets.AIRTABLE_TABLE }}
