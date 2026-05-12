@@ -10,28 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+
       - run: pip install requests beautifulsoup4
-      - uses: actions/cache@v4
-        with:
-          path: hancinema_state.json
-          key: hancinema-state-${{ github.run_id }}
-          restore-keys: hancinema-state-
+
       - name: Rodar monitoramento
         env:
           AIRTABLE_KEY: ${{ secrets.AIRTABLE_KEY }}
           AIRTABLE_BASE: ${{ secrets.AIRTABLE_BASE }}
           AIRTABLE_TABLE: ${{ secrets.AIRTABLE_TABLE }}
-          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
-          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
         run: python monitor.py
-      - uses: actions/cache/save@v4
-        if: always()
-        with:
-          path: hancinema_state.json
-          key: hancinema-state-${{ github.run_id }}
